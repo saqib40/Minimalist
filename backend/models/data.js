@@ -38,6 +38,9 @@ const userSchema = new mongoose.Schema({
             ref: "Notes",
         }
     ],
+    profileURL: {
+        type: String,
+    },
 });
 
 const noteModel = mongoose.model('Notes', noteSchema); 

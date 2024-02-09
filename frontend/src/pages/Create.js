@@ -9,7 +9,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 //makeStyles is deprecated to apply custom styles we have to use sx
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 */
 export default function Create() {
   //const classes = useStyles();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
   const [titleError, setTitleError] = useState(false);
@@ -64,8 +64,10 @@ export default function Create() {
         },
         body: JSON.stringify({title, details, category}),
       })
-      const responseData = response.json();
-      console.log(responseData);
+      //const responseData = response.json();
+      navigate("/view");
+      window.location.reload(); // Force page refresh
+      //console.log(responseData);
     }
   }
 

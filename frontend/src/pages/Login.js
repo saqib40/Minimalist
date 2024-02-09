@@ -47,6 +47,7 @@ export default function Login() {
             const myProtected = localStorage.getItem("myToken");
             //return <Notes token={myProtected} />; // this line doesn't work as i thought, I don't think this is the way to do it, we gotta figure out a way to redirect user to notes page
             navigate("/view");
+            window.location.reload(); // Force page refresh
           }
         }
         catch(error) {

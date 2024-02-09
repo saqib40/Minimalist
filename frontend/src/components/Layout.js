@@ -5,14 +5,17 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import { AddCircleOutline, SubjectOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from 'react-router-dom';
+/*
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { format } from "date-fns";
 import Avatar from '@mui/material/Avatar';
+*/
 
 const drawerWidth = "240px";
 
@@ -47,24 +50,7 @@ export default function Layout({children}) {
 
     return(
         <StyledRoot> {/* sx = {{backgroundColor: "red", width: "100%"}} this can't be understood by react */}
-        <AppBar
-         sx={{
-            width: `calc(100% - ${drawerWidth})`,
-            backgroundColor: "#f9f9f9",
-            color: "black"
-         }}
-         elevation={0}
-        >
-            <Toolbar>
-                <Typography sx={{flexGrow: 1}}>
-                    Today is the {format(new Date(), "do MMMM y")}
-                </Typography>
-                <Typography> {/* Here goes the user name who's logged in */}
-                    Mario
-                </Typography>
-                <Avatar src="mario-av.png" sx={{marginLeft: "16px"}}/>
-            </Toolbar>
-        </AppBar>
+        
         <Drawer
           sx = {{
             width: drawerWidth,
@@ -102,6 +88,18 @@ export default function Layout({children}) {
                         </ListItemButton>
                     </ListItem>
                 ))}
+                <ListItem>
+                    <ListItemButton
+                     onClick={() => {
+                        localStorage.clear();
+                        navigate("/login");
+                        window.location.reload(); // Force page refresh
+                     }}
+                    >
+                    <ListItemIcon><LogoutIcon color="primary"/></ListItemIcon>
+                    <ListItemText primary={"Logout"}/>
+                    </ListItemButton>
+                </ListItem>
             </List>
 
         </Drawer>

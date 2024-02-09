@@ -5,8 +5,18 @@ import { Container } from '@mui/material';
 import NoteCard from '../components/NoteCard';
 import Masonry from '@mui/lab/Masonry';
 
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { format } from "date-fns";
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+
+const drawerWidth = "240px";
+
 export default function Notes({token}) {
   const [notes, setNotes] = useState([]);
+  const [username, setUsername] = useState("");
+  console.log(username);
 
   useEffect(() => {
     fetch("http://localhost:4000/v1/view", {
@@ -17,7 +27,10 @@ export default function Notes({token}) {
       },
     })
      .then(res => res.json())
-     .then(data => setNotes(data.data))
+     .then(data => {
+      setNotes(data.data);
+      setUsername(data.username);
+     })
   }, [token]);
 
   const handleDelete = async(id) => {
@@ -49,6 +62,24 @@ export default function Notes({token}) {
         </Grid>
       </Grid> */
       }
+      <AppBar
+         sx={{
+            width: `calc(100% - ${drawerWidth})`,
+            backgroundColor: "#f9f9f9",
+            color: "black"
+         }}
+         elevation={0}
+        >
+            <Toolbar>
+                <Typography sx={{flexGrow: 1}}>
+                    Today is the {format(new Date(), "do MMMM y")}
+                </Typography>
+                <Typography> {/* Here goes the user name who's logged in */}
+                    {username}
+                </Typography>
+                <Avatar src="mario-av.png" sx={{marginLeft: "16px"}}/>
+            </Toolbar>
+        </AppBar>
       <Masonry container spacing={{ xs: 1, sm: 2, md: 3 }} columns={{ xs: 1, sm: 2, md: 3 }}>
         {notes.map(note => {
           return <div key={note._id}>

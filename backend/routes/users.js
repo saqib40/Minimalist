@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const {login, signup} = require("../controllers/Auth");
-const {auth, create, view, remove} = require("../protected/auth");
+const {auth, create, view, remove, upload} = require("../protected/auth");
 
 router.post("/login", login);
 router.post("/signup", signup);
@@ -11,6 +11,6 @@ router.post("/signup", signup);
 router.delete("/remove/:noteId", auth, remove);
 router.post("/create", auth, create);
 router.get("/view", auth, view);
-//router.post("/logout", auth, logout);
+router.post("/upload", auth, upload);
 
 module.exports = router;

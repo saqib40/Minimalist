@@ -4,6 +4,7 @@ import Notes from './pages/Notes';
 import Create from './pages/Create';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Upload from './pages/upload';
 import { createTheme, ThemeProvider} from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import Layout from './components/Layout';
@@ -46,9 +47,13 @@ function App() {
               path="/create"
               element={<Layout><Create /></Layout>}
             />
+            <Route
+              path="/upload"
+              element={<Upload />}
+            />
           </>
           ) : (
-            <Route path="*" />
+            <Route path="*" element={<h1>You are unauthorized to access this protected route</h1>}/>
           )
           }
           {/*

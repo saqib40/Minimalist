@@ -15,6 +15,15 @@ app.use(express.json());
 
 require("./config/db").connect();
 
+const fileupload = require("express-fileupload");
+app.use(fileupload({
+    useTempFiles: true,
+    tempFileDir: "/tmp",
+}));
+
+const cloudinary = require("./config/cloudinary");
+cloudinary.cloudinaryConnect();
+
 app.use("/v1", user);
 
 app.listen(PORT, () => {
